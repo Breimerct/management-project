@@ -1,0 +1,39 @@
+{
+    "projectId": {
+        "name": "Project Name",
+        "description": "Project Description",
+        "isActive": true,
+        "createdDate": "2021-01-01T00:00:00.000Z",
+        "to-do": {
+            "taskId": {
+                "id": 1,
+                "name": "Task 1",
+                "description": "Task 1 Description",
+                "isCompleted": false,
+                "createdDate": "2021-01-01T00:00:00.000Z",
+                "dueDate": "2021-01-01T00:00:00.000Z"
+            }
+        },
+        "in-progress": {
+            "taskId": {
+                "id": 3,
+                "name": "Task 3",
+                "description": "Task 3 Description",
+                "isCompleted": false,
+                "createdDate": "2021-01-01T00:00:00.000Z",
+                "dueDate": "2021-01-01T00:00:00.000Z"
+            }
+        
+        },
+        "done": {
+            "taskId": {
+                "id": 5,
+                "name": "Task 5",
+                "description": "Task 5 Description",
+                "isCompleted": true,
+                "createdDate": "2021-01-01T00:00:00.000Z",
+                "dueDate": "2021-01-01T00:00:00.000Z"
+            }
+        }
+    }
+}

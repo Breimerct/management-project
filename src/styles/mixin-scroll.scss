@@ -1,0 +1,27 @@
+/* src/styles/_scrollbar.scss */
+@mixin custom-scrollbar(
+  $thumb-color: #888,
+  $track-color: #f1f1f1,
+  $thumb-hover-color: #555,
+  $width: 10px,
+  $height: 10px
+) {
+  &::-webkit-scrollbar {
+    width: $width; /* Ancho del scrollbar */
+    height: $height; /* Alto del scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track-color; /* Color del track del scrollbar */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumb-color; /* Color del thumb del scrollbar */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 3px solid $track-color; /* Espacio entre el thumb y el track */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $thumb-hover-color; /* Color del thumb cuando se hace hover */
+  }
+}
