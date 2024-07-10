@@ -2,8 +2,9 @@
   <v-layout>
     <v-navigation-drawer permanent expand-on-hover rail>
       <v-list-item
-        prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-        title="John Leider"
+        :prepend-avatar="`${UI_AVATAR_URL_BASE}&name=${currentUser.displayName}`"
+        class="text-capitalize"
+        :title="capitalizeText(currentUser.displayName)"
         nav
       >
         <template v-slot:append>
@@ -44,15 +45,22 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue';
 import { RouterView, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { RootState } from '@/store';
+import { UI_AVATAR_URL_BASE } from '../constanst';
 
-const store = useStore<RootState>();
+const $store = useStore<RootState>();
 const router = useRouter();
 
+const currentUser = computed(() => $store.getters['auth/getCurrentUser']);
+
+const capitalizeText = (text: string) =>
+  text.charAt(0).toUpperCase() + text.slice(1);
+
 const handleLogout = () => {
-  store.dispatch('auth/logout').then(() => {
+  $store.dispatch('auth/logout').then(() => {
     router.push('/auth/login');
   });
 };

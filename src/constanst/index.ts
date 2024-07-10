@@ -1,4 +1,7 @@
-import { StatusTask } from '@/types/types';
+import { StatusTask } from '@/types';
+
+export const UI_AVATAR_URL_BASE =
+  'https://ui-avatars.com/api/?bold=true&uppercase=true';
 
 export const STATUS_TASKS: StatusTask[] = [
   { name: 'To Do', id: 'to-do' },
