@@ -46,8 +46,4 @@ const id = computed({
     router.push(`/projects/${value}`);
   },
 });
-
-// const handleProjectChange = (id: string) => {
-//   router.push(`/projects/${id}`);
-// };
 </script>
