@@ -46,9 +46,9 @@ export type Project = {
   uid?: string;
   name: string;
   description: string;
-  createAt: string | Date;
+  createAt?: string | Date;
   userId?: string;
-  isActive: boolean;
+  isActive?: boolean;
 };
 
 export type Task = {
@@ -57,5 +57,5 @@ export type Task = {
   statusId: string;
   name: string;
   description: string;
-  createAt: string | Date;
+  createAt?: string | Date;
 };
