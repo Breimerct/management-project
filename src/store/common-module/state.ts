@@ -1,9 +1,5 @@
-export interface ICommonState {
-  count: number
-}
+export interface ICommonState {}
 
-const state: ICommonState = {
-  count: 0
-}
+const state: ICommonState = {};
 
-export default state
+export default state;

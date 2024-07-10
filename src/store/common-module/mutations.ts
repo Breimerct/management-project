@@ -1,8 +1,4 @@
-import { type MutationTree } from 'vuex'
-import { type ICommonState } from './state'
+import { type MutationTree } from 'vuex';
+import { type ICommonState } from './state';
 
-export const mutations: MutationTree<ICommonState> = {
-  increment(state) {
-    state.count++
-  }
-}
+export const mutations: MutationTree<ICommonState> = {};

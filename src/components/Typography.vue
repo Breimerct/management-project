@@ -32,3 +32,4 @@ const attrs = computed(() => ({
   },
 }));
 </script>
+../types/types ../types/type.

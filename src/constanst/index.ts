@@ -1,4 +1,4 @@
-import { StatusTask } from '@/types';
+import { StatusTask } from '@/types/types';
 
 export const STATUS_TASKS: StatusTask[] = [
   { name: 'To Do', id: 'to-do' },

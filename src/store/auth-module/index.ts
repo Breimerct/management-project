@@ -1,12 +1,12 @@
 import { type Module } from 'vuex';
 import { type RootState } from '..';
-import state, { type ICommonState } from './state';
+import state, { type IAuthState } from './state';
 import { getters } from './getters';
 import { mutations } from './mutations';
 import { actions } from './actions';
-export { type ICommonState } from './state';
+export { type IAuthState } from './state';
 
-const CommonModule: Module<ICommonState, RootState> = {
+const AuthModule: Module<IAuthState, RootState> = {
   namespaced: true,
   state,
   getters,
@@ -14,4 +14,4 @@ const CommonModule: Module<ICommonState, RootState> = {
   actions,
 };
 
-export default CommonModule;
+export default AuthModule;

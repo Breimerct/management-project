@@ -1,14 +1,17 @@
-import { createStore } from 'vuex'
-import CommonModule, { type ICommonState } from './common-module'
+import { createStore } from 'vuex';
+import CommonModule, { type ICommonState } from './common-module';
+import AuthModule, { IAuthState } from './auth-module';
 
 export interface RootState {
-  common: ICommonState
+  common: ICommonState;
+  auth: IAuthState;
 }
 
 const store = createStore<RootState>({
   modules: {
-    common: CommonModule
-  }
-})
+    common: CommonModule,
+    auth: AuthModule,
+  },
+});
 
-export default store
+export default store;
