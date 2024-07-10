@@ -1,5 +1,3 @@
-import { DataSnapshot, Unsubscribe } from 'firebase/database';
-
 export enum TypographyVariant {
   h1 = 'h1',
   h2 = 'h2',
@@ -20,13 +18,6 @@ export type StatusTask = {
   id: string;
 };
 
-export type Task = {
-  id: string | number;
-  name: string;
-  description?: string;
-  statusId: string;
-};
-
 export type NewUser = {
   fullName: string;
   email: string;
@@ -36,9 +27,7 @@ export type NewUser = {
 export type GetDB = (
   path: string,
   userId: string,
-  snapshot: (snapshot: DataSnapshot) => void,
-  error?: (error: Error) => void,
-) => Unsubscribe;
+) => Promise<Recird<string, object>>;
 
 export type SetDB = <T>(path: string, data: T) => Promise<T | null>;
 
@@ -51,4 +40,22 @@ export type VFormType = {
   validate: () => boolean;
   reset: () => void;
   resetValidation: () => void;
+};
+
+export type Project = {
+  uid?: string;
+  name: string;
+  description: string;
+  createAt: string | Date;
+  userId?: string;
+  isActive: boolean;
+};
+
+export type Task = {
+  uid?: string;
+  projectId: string;
+  statusId: string;
+  name: string;
+  description: string;
+  createAt: string | Date;
 };

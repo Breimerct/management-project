@@ -9,18 +9,13 @@
         label="Projects"
         placeholder="Select your project"
         v-model="id"
-        :items="[
-          'California',
-          'Colorado',
-          'Florida',
-          'Georgia',
-          'Texas',
-          'Wyoming',
-        ]"
+        :items="projects"
+        item-title="name"
+        return-object
       ></v-autocomplete>
     </v-col>
     <v-col cols="6" align="end">
-      <v-btn color="primary">Create new project</v-btn>
+      <NewProject />
     </v-col>
   </v-row>
 
@@ -30,20 +25,39 @@
 </template>
 
 <script lang="ts" setup>
-import { useRoute, useRouter } from 'vue-router';
 import { computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import { RootState } from '@/store';
+import { Project } from '../../types';
 
 // imports components
 import ProjectHome from './components/ProjectHome.vue';
 import Board from './components/Board.vue';
+import NewProject from '../../components/new-project/NewProject.vue';
+import { onMounted } from 'vue';
 
 const route = useRoute();
 const router = useRouter();
+const $store = useStore<RootState>();
 
-const id = computed({
-  get: () => (route.params?.projectId || null) as string,
-  set: (value: string) => {
-    router.push(`/projects/${value}`);
+const id = computed<Project>({
+  get: () => {
+    const projectId = route.params.projectId;
+    return projects.value.find(
+      (project) => project.uid === projectId,
+    ) as Project;
   },
+  set: (value: Project) => {
+    router.push(`/projects/${value.uid}`);
+  },
+});
+
+const projects = computed<Project[]>(
+  () => $store.getters['project/getProjects'],
+);
+
+onMounted(async () => {
+  $store.dispatch('project/searchProjects');
 });
 </script>

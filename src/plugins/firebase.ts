@@ -84,11 +84,21 @@ export const createAccount = async ({ email, password, fullName }: NewUser) => {
 
 export const resetPassword = sendPasswordResetEmail.bind(null, auth);
 
-export const getDB: GetDB = (path, userId, snapshot, error) => {
-  const rootPath = `users/${userId}/${path}`;
-  const starCountRef = ref(db, rootPath);
+export const getDB: GetDB = (path, userId) => {
+  return new Promise((resolve, reject) => {
+    const rootPath = `users/${userId}/${path}`;
+    const dbRef = ref(db, rootPath);
 
-  return onValue(starCountRef, snapshot, error);
+    onValue(
+      dbRef,
+      (snapshot) => {
+        const data = snapshot.val();
+
+        resolve(data);
+      },
+      reject,
+    );
+  });
 };
 
 export const setDB: SetDB = async <T>(path: string, data: T) => {

@@ -1,10 +1,6 @@
 <template>
   <ul class="task-list">
-    <li
-      v-for="task in convertObjectToArray(tasks[statusId])"
-      :key="task.id"
-      class="task-list-item"
-    >
+    <li v-for="task in tasks" :key="task.uid" class="task-list-item">
       {{ task.name }}
     </li>
 
@@ -19,42 +15,24 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, onMounted } from 'vue';
 import { Task } from '../../../types';
 import { defineProps } from 'vue';
+import { useStore } from 'vuex';
+import { RootState } from '@/store';
+
+const $store = useStore<RootState>();
 
 const { statusId, projectId } = defineProps<{
   statusId: string;
   projectId: string;
 }>();
 
-console.log(statusId, projectId);
+const tasks = computed<Task[]>(() => $store.getters['task/getTasks']);
 
-const tasks = ref<Record<string, Record<string, Task>>>({
-  'to-do': {
-    '1': { id: '1', name: 'Task 1', statusId: 'to-do' },
-    '2': { id: '2', name: 'Task 2', statusId: 'to-do' },
-    '3': { id: '3', name: 'Task 3', statusId: 'to-do' },
-    '10': { id: '10', name: 'Task 10', statusId: 'to-do' },
-    '11': { id: '11', name: 'Task 11', statusId: 'to-do' },
-    '12': { id: '12', name: 'Task 12', statusId: 'to-do' },
-    '13': { id: '13', name: 'Task 13', statusId: 'to-do' },
-    '14': { id: '14', name: 'Task 14', statusId: 'to-do' },
-    '15': { id: '15', name: 'Task 15', statusId: 'to-do' },
-  },
-  'in-progress': {
-    '4': { id: '4', name: 'Task 4', statusId: 'in-progress' },
-    '5': { id: '5', name: 'Task 5', statusId: 'in-progress' },
-    '6': { id: '6', name: 'Task 6', statusId: 'in-progress' },
-  },
-  done: {
-    '7': { id: '7', name: 'Task 7', statusId: 'done' },
-    '8': { id: '8', name: 'Task 8', statusId: 'done' },
-    '9': { id: '9', name: 'Task 9', statusId: 'done' },
-  },
+onMounted(async () => {
+  $store.dispatch('task/searchTasks', { statusId, projectId });
 });
-
-const convertObjectToArray = (obj: Record<string, Task>) => Object.values(obj);
 </script>
 
 <style lang="scss" scoped>
