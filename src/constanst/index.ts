@@ -11,6 +11,8 @@ export const STATUS_TASKS: StatusTask[] = [
   { name: 'Done', id: 'done' },
 ];
 
+export const STATUS_RULES = [(v: string) => !!v || 'Status is required'];
+
 export const EMAIL_RULES = [
   (v: string) => !!v || 'E-mail is required',
   (v: string) => /.+@.+\..+/.test(v) || 'E-mail must be valid',

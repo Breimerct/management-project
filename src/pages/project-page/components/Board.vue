@@ -17,19 +17,26 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { STATUS_TASKS } from '../../../constanst';
 import { StatusTask } from '../../../types';
 import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { RootState } from '@/store';
 
 // imports components
 import Task from './Task.vue';
 import Typography from '../../../components/Typography.vue';
 
 const route = useRoute();
+const $store = useStore<RootState>();
 
 const statusTasks = ref<StatusTask[]>(STATUS_TASKS);
 const projectId = computed(() => route.params?.projectId as string);
+
+onMounted(async () => {
+  $store.dispatch('task/searchTask', { projectId: projectId.value });
+});
 </script>
 
 <style lang="scss" scoped>

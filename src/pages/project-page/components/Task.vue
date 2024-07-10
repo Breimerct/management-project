@@ -1,38 +1,39 @@
 <template>
   <ul class="task-list">
-    <li v-for="task in tasks" :key="task.uid" class="task-list-item">
+    <li
+      v-for="task in convertObjectToArray(tasks[statusId])"
+      :key="task.uid"
+      class="task-list-item"
+    >
       {{ task.name }}
     </li>
 
-    <li
-      class="task-list-item new-task-button"
-      @click="console.log('Create new task')"
-    >
-      <v-icon size="x-large"> mdi-plus </v-icon>
-      <span>Create new task</span>
-    </li>
+    <NewTask :projectId="projectId" :statusId="statusId" />
   </ul>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { Task } from '../../../types';
-import { defineProps } from 'vue';
+// import { defineProps } from 'vue';
 import { useStore } from 'vuex';
 import { RootState } from '@/store';
 
+import NewTask from '@/components/new-task/NewTask.vue';
+
 const $store = useStore<RootState>();
 
-const { statusId, projectId } = defineProps<{
+const { statusId } = defineProps<{
   statusId: string;
   projectId: string;
 }>();
 
-const tasks = computed<Task[]>(() => $store.getters['task/getTasks']);
+const tasks = computed<Record<string, any>>(
+  () => $store.getters['task/getTasks'],
+);
 
-onMounted(async () => {
-  $store.dispatch('task/searchTasks', { statusId, projectId });
-});
+const convertObjectToArray = (data: Record<string, Task>) =>
+  Object.values(data || {});
 </script>
 
 <style lang="scss" scoped>
@@ -77,4 +78,3 @@ onMounted(async () => {
   }
 }
 </style>
-../../../types/types ../../../types/type.

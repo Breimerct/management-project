@@ -1,10 +1,10 @@
 import { Task } from '@/types';
 
-export interface IProjectState {
+export interface ITaskState {
   tasks: Task[];
 }
 
-const state: IProjectState = {
+const state: ITaskState = {
   tasks: [],
 };
 

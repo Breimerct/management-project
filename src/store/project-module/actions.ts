@@ -16,7 +16,7 @@ export const actions: ActionTree<IProjectState, RootState> = {
   async searchProjects({ commit, rootGetters }) {
     const userId = rootGetters['auth/getCurrentUser'].uid;
     const response = await getDB('projects', userId);
-    const projects = Object.values(response);
+    const projects = Object.values(response || {});
 
     commit('setProjects', projects);
   },

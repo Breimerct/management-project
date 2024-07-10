@@ -75,8 +75,6 @@ export const createAccount = async ({ email, password, fullName }: NewUser) => {
     emailVerified: user.emailVerified,
   };
 
-  console.log('newUser', newUser);
-
   await set(pushRef, newUser);
 
   return { ...user, newUser } as User;

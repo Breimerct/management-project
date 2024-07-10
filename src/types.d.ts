@@ -53,7 +53,7 @@ export type Project = {
 
 export type Task = {
   uid?: string;
-  projectId: string;
+  projectId?: string;
   statusId: string;
   name: string;
   description: string;
