@@ -89,7 +89,7 @@ export const getDB: GetDB = (path, userId) => {
 
     onValue(
       dbRef,
-      (snapshot) => {
+      (snapshot: any) => {
         const data = snapshot.val();
 
         resolve(data);

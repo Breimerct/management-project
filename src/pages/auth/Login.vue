@@ -43,7 +43,7 @@ import { useRouter } from 'vue-router';
 const store = useStore<RootState>();
 const router = useRouter();
 
-const formValid = ref(false);
+const formValid = ref();
 const email = ref('');
 const password = ref('');
 

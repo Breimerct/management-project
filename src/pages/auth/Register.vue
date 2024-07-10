@@ -66,11 +66,11 @@ import { useRouter } from 'vue-router';
 const $store = useStore<RootState>();
 const router = useRouter();
 
-const formValid = ref(false);
-const fullName = ref('breimer correa');
-const email = ref('donbre18@gmail.com');
-const password = ref('123123');
-const confirmPassword = ref('123123');
+const formValid = ref();
+const fullName = ref('');
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
 
 const confirmPasswordRules = computed(() =>
   CONFIRM_PASSWORD_RULES.map((rule) =>

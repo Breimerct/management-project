@@ -34,7 +34,7 @@ import { useStore } from 'vuex';
 
 const $store = useStore<RootState>();
 
-const formValid = ref(false);
+const formValid = ref();
 const email = ref('');
 
 const handleForgotPassword = () => {
