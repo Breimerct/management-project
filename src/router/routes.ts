@@ -6,6 +6,9 @@ const routes: RouteRecordRaw[] = [
     redirect: {
       name: 'projects',
     },
+    meta: {
+      requiresAuth: true,
+    },
     component: () => import('../layout/MainLayout.vue'),
     children: [
       {
@@ -14,6 +17,38 @@ const routes: RouteRecordRaw[] = [
         component: () => import('../pages/project-page/Project.vue'),
       },
     ],
+  },
+  {
+    path: '/auth',
+    redirect: {
+      name: 'login',
+    },
+    meta: {
+      requiresAuth: false,
+    },
+    component: () => import('../layout/AuthLayout.vue'),
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('../pages/auth/Login.vue'),
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('../pages/auth/Register.vue'),
+      },
+      {
+        path: 'forgot-password',
+        name: 'forgotPassword',
+        component: () => import('../pages/auth/ForgotPassword.vue'),
+      },
+    ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('../pages/404.vue'),
   },
 ];
 
