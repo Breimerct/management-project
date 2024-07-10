@@ -50,6 +50,7 @@ const id = computed<Project>({
   },
   set: (value: Project) => {
     router.push(`/projects/${value.uid}`);
+    $store.dispatch('task/searchTask', { projectId: value.uid });
   },
 });
 

@@ -3,21 +3,48 @@ import { type IProjectState } from './state';
 import { type RootState } from '..';
 import { Project } from '../../types';
 import { getDB, setDB } from '@/plugins/firebase';
+import { FirebaseError } from 'firebase/app';
+import { FIREBASE_ERRORS } from '@/constanst/firebaseError';
+import { useToast } from 'vue-toast-notification';
+
+export const $toast = useToast();
 
 export const actions: ActionTree<IProjectState, RootState> = {
   createProject({ rootGetters, dispatch }, project: Project) {
-    const userId = rootGetters['auth/getCurrentUser'].uid;
-    const newProject = { ...project, userId };
+    try {
+      const userId = rootGetters['auth/getCurrentUser'].uid;
+      const newProject = { ...project, userId };
 
-    setDB('projects', newProject);
-    dispatch('searchProjects');
+      setDB('projects', newProject);
+      dispatch('searchProjects');
+    } catch (error) {
+      const { code } = error as FirebaseError;
+
+      if (code) {
+        console.error(FIREBASE_ERRORS[code]);
+        $toast.error(FIREBASE_ERRORS[code]);
+      }
+
+      throw new Error(FIREBASE_ERRORS[code]);
+    }
   },
 
   async searchProjects({ commit, rootGetters }) {
-    const userId = rootGetters['auth/getCurrentUser'].uid;
-    const response = await getDB('projects', userId);
-    const projects = Object.values(response || {});
+    try {
+      const userId = rootGetters['auth/getCurrentUser'].uid;
+      const response = await getDB('projects', userId);
+      const projects = Object.values(response || {});
 
-    commit('setProjects', projects);
+      commit('setProjects', projects);
+    } catch (error) {
+      const { code } = error as FirebaseError;
+
+      if (code) {
+        console.error(FIREBASE_ERRORS[code]);
+        $toast.error(FIREBASE_ERRORS[code]);
+      }
+
+      throw new Error(FIREBASE_ERRORS[code]);
+    }
   },
 };
