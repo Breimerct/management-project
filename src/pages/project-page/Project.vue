@@ -34,8 +34,6 @@ import { useStore } from 'vuex';
 // imports components
 import FilterProjectByStatus from '../../components/filter-projects-by-status/FilterProjectByStatus.vue';
 import NewProject from '../../components/new-project/NewProject.vue';
-// import ProjectHome from './components/ProjectHome.vue';
-// import Board from './components/Board.vue';
 
 const route = useRoute();
 const router = useRouter();
