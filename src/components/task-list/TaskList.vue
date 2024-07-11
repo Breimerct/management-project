@@ -1,5 +1,7 @@
 <template>
   <ul class="task-list">
+    <NewTask :projectId="projectId" :statusId="statusId" />
+
     <li
       v-for="task in convertObjectToArray(tasks[statusId])"
       :key="task.uid"
@@ -42,8 +44,6 @@
         </v-tooltip>
       </Typography>
     </li>
-
-    <NewTask :projectId="projectId" :statusId="statusId" />
   </ul>
 </template>
 
