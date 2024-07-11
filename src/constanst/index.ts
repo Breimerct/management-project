@@ -11,6 +11,12 @@ export const STATUS_TASKS: StatusTask[] = [
   { name: 'Done', id: 'done' },
 ];
 
+export const STATUS_OPTIONS = [
+  { label: 'All', value: 'all' },
+  { label: 'Active', value: 'active' },
+  { label: 'Inactive', value: 'inactive' },
+];
+
 export const STATUS_RULES = [(v: string) => !!v || 'Status is required'];
 
 export const EMAIL_RULES = [

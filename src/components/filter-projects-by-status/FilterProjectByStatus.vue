@@ -11,7 +11,7 @@
       >
       <v-radio-group v-model="projectStatus">
         <v-radio
-          v-for="status in statusOptions"
+          v-for="status in STATUS_OPTIONS"
           :key="status.value"
           :label="status.label"
           :value="status.value"
@@ -25,6 +25,8 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { defineEmits } from 'vue';
+import { STATUS_OPTIONS } from '../../constanst';
 
 const emits = defineEmits<{
   (event: 'statusSelected', status: string): void;
@@ -38,10 +40,4 @@ const projectStatus = computed<string>({
     emits('statusSelected', value);
   },
 });
-
-const statusOptions = [
-  { label: 'All', value: 'all' },
-  { label: 'Active', value: 'active' },
-  { label: 'Inactive', value: 'inactive' },
-];
 </script>
