@@ -6,7 +6,7 @@ import 'vue-toast-notification/dist/theme-default.css';
 
 // Types
 import type { App } from 'vue';
-import store from '@/store';
+import store from '../store';
 
 export function registerPlugins(app: App) {
   app.use(vuetify).use(ToastPlugin).use(router).use(store);

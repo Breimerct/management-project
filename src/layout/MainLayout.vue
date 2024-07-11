@@ -48,7 +48,7 @@
 import { computed } from 'vue';
 import { RouterView, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
-import { RootState } from '@/store';
+import { RootState } from '../store';
 import { UI_AVATAR_URL_BASE } from '../constanst';
 
 const $store = useStore<RootState>();

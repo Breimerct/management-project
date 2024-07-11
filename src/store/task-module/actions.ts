@@ -2,8 +2,8 @@ import { type ActionTree } from 'vuex';
 import { type ITaskState } from './state';
 import { type RootState } from '..';
 import { Task } from '../../types';
-import { getDB, setDB } from '@/plugins/firebase';
-import { FIREBASE_ERRORS } from '@/constanst/firebaseError';
+import { getDB, setDB } from '../../plugins/firebase';
+import { FIREBASE_ERRORS } from '../../constanst/firebaseError';
 import { FirebaseError } from 'firebase/app';
 import { useToast } from 'vue-toast-notification';
 

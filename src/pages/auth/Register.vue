@@ -54,7 +54,7 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
-import { RootState } from '@/store';
+import { RootState } from '../../store';
 import {
   FULL_NAME_RULES,
   EMAIL_RULES,

@@ -37,7 +37,7 @@
 import { ref } from 'vue';
 import { EMAIL_RULES, PASSWORD_RULES } from '../../constanst';
 import { useStore } from 'vuex';
-import { RootState } from '@/store';
+import { RootState } from '../../store';
 import { useRouter } from 'vue-router';
 
 const store = useStore<RootState>();

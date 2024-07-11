@@ -7,8 +7,8 @@ import {
   createAccount,
   resetPassword,
   logout,
-} from '@/plugins/firebase';
-import { FIREBASE_ERRORS } from '@/constanst/firebaseError';
+} from '../../plugins/firebase';
+import { FIREBASE_ERRORS } from '../../constanst/firebaseError';
 import { FirebaseError } from 'firebase/app';
 import { useToast } from 'vue-toast-notification';
 

@@ -2,9 +2,9 @@ import { type ActionTree } from 'vuex';
 import { type IProjectState } from './state';
 import { type RootState } from '..';
 import { Project } from '../../types';
-import { getDB, setDB } from '@/plugins/firebase';
+import { getDB, setDB } from '../../plugins/firebase';
 import { FirebaseError } from 'firebase/app';
-import { FIREBASE_ERRORS } from '@/constanst/firebaseError';
+import { FIREBASE_ERRORS } from '../../constanst/firebaseError';
 import { useToast } from 'vue-toast-notification';
 
 export const $toast = useToast();

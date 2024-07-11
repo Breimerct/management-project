@@ -15,11 +15,10 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { Task } from '../../../types';
-// import { defineProps } from 'vue';
 import { useStore } from 'vuex';
-import { RootState } from '@/store';
+import { RootState } from '../../../store';
 
-import NewTask from '@/components/new-task/NewTask.vue';
+import NewTask from '../../../components/new-task/NewTask.vue';
 
 const $store = useStore<RootState>();
 

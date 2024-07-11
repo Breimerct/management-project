@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { EMAIL_RULES } from '../../constanst';
-import { RootState } from '@/store';
+import { RootState } from '../../store';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 

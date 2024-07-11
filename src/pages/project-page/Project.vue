@@ -30,7 +30,7 @@
 import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { Project } from '../../types';
-import { RootState } from '@/store';
+import { RootState } from '../../store';
 import { useStore } from 'vuex';
 
 // imports components

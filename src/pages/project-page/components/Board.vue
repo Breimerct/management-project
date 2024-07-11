@@ -18,11 +18,11 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
-import { STATUS_TASKS } from '../../../constanst';
-import { StatusTask } from '../../../types';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
-import { RootState } from '@/store';
+import { STATUS_TASKS } from '../../../constanst';
+import { StatusTask } from '../../../types';
+import { RootState } from '../../../store';
 
 // imports components
 import Task from './Task.vue';

@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { useStore } from 'vuex';
-import { RootState } from '@/store';
+import { RootState } from '../../store';
 import { Project } from '../../types';
 
 // components imports

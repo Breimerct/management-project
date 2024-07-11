@@ -4,7 +4,7 @@
       <v-img
         :aspect-ratio="1"
         class="bg-white"
-        src="@/assets/home-image.svg"
+        src="../../../assets/home-image.svg"
         width="100%"
         height="300"
         contain
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-import Typography from '@/components/Typography.vue';
+import Typography from '../../../components/Typography.vue';
 </script>
 
 <style lang="scss" scoped>
