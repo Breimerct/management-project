@@ -77,7 +77,7 @@ export const createAccount = async ({ email, password, fullName }: NewUser) => {
 
   await set(pushRef, newUser);
 
-  return { ...user, newUser } as User;
+  return { ...user, ...newUser } as User;
 };
 
 export const resetPassword = sendPasswordResetEmail.bind(null, auth);
