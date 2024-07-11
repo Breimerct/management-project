@@ -8,7 +8,7 @@
         density="compact"
         label="Projects"
         placeholder="Select your project"
-        v-model="id"
+        v-model="projectSelected"
         :items="projects"
         item-title="name"
         :disabled="disableFilters"
@@ -23,7 +23,7 @@
     <v-col cols="6" align="end">
       <div class="d-flex ga-2 justify-end">
         <NewProject />
-        <EditProject :project="project" />
+        <EditProject v-if="projectSelected?.uid" :project="project" />
       </div>
     </v-col>
   </v-row>
@@ -48,7 +48,7 @@ const router = useRouter();
 const $store = useStore<RootState>();
 
 const statusProjectFilter = ref('all');
-const id = computed<Project>({
+const projectSelected = computed<Project>({
   get: () => {
     const projectId = route.params.projectId;
     return projects.value.find(
@@ -73,11 +73,12 @@ const projects = computed<Project[]>(
 );
 
 const project = computed<Project>(() => {
-  if (!id.value || !projects.value.length) return {} as Project;
+  if (!projectSelected.value || !projects.value.length) return {} as Project;
 
   return (
-    projects.value.find((project) => project.uid === id.value.uid) ||
-    ({} as Project)
+    projects.value.find(
+      (project) => project.uid === projectSelected.value.uid,
+    ) || ({} as Project)
   );
 });
 
