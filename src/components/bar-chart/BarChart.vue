@@ -1,8 +1,14 @@
 <template>
-  <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+  <Bar
+    id="my-chart-id"
+    :options="chartOptions"
+    :data="chartData"
+    :ref="barChart"
+  />
 </template>
 
 <script setup lang="ts">
+import { computed, defineProps, ref, reactive } from 'vue';
 import { Bar } from 'vue-chartjs';
 import { Chart as ChartJS, registerables } from 'chart.js';
 
@@ -12,18 +18,20 @@ const { data } = defineProps<{
   data: { name: string; quantity: number }[];
 }>();
 
-// alto maximo de la grafica
-const chartData = {
-  labels: data.map((item) => item.name),
+const barChart = ref();
+const propsData = computed(() => data);
+
+const chartData = reactive({
+  labels: propsData.value.map((item) => item.name),
   datasets: [
     {
-      data: data.map((item) => item.quantity),
+      data: propsData.value.map((item) => item.quantity),
       backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
     },
   ],
-};
+});
 
-const chartOptions = {
+const chartOptions = reactive({
   responsive: true,
   maintainAspectRatio: false,
   aspectRatio: 3 / 4,
@@ -32,5 +40,5 @@ const chartOptions = {
       display: false,
     },
   },
-};
+});
 </script>

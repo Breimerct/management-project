@@ -1,6 +1,6 @@
 <template>
   <v-container class="mb-16">
-    <BarChart :data="data" />
+    <BarChart :data="data" ref="barChart" />
   </v-container>
 </template>
 
@@ -15,11 +15,6 @@ const $store = useStore<RootState>();
 const route = useRoute();
 
 const projectId = computed(() => route.params?.projectId);
-
-const data = computed(() => {
-  const tasks = $store.getters['task/getTasks'];
-  return countTasksByStatus(tasks);
-});
 
 const countTasksByStatus = (data: Record<string, Record<string, any>>) => {
   const result: { name: string; quantity: number }[] = [];
@@ -42,6 +37,11 @@ const countTasksByStatus = (data: Record<string, Record<string, any>>) => {
 
   return result;
 };
+
+const data = computed(() => {
+  const tasks = $store.getters['task/getTasks'];
+  return countTasksByStatus(tasks);
+});
 
 onMounted(() => {
   $store.dispatch('task/searchTask', { projectId: projectId.value });

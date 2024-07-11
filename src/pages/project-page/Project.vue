@@ -11,10 +11,14 @@
         v-model="id"
         :items="projects"
         item-title="name"
+        :disabled="disableFilters"
         return-object
       ></v-autocomplete>
 
-      <FilterProjectByStatus @statusSelected="statusProjectFilter = $event" />
+      <FilterProjectByStatus
+        :disabled="disableFilters"
+        @statusSelected="statusProjectFilter = $event"
+      />
     </v-col>
     <v-col cols="6" align="end">
       <div class="d-flex ga-2 justify-end">
@@ -52,12 +56,13 @@ const id = computed<Project>({
     ) as Project;
   },
   set: (value: Project) => {
-    console.log(value.uid);
     const routeName = route.name === 'project' ? 'projectBoard' : route?.name;
     router.push({ name: routeName || '', params: { projectId: value.uid } });
     $store.dispatch('task/searchTask', { projectId: value.uid });
   },
 });
+
+const disableFilters = computed<boolean>(() => route.name === 'projectStats');
 
 const projects = computed<Project[]>(
   () =>

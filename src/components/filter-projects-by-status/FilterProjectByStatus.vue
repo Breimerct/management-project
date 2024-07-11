@@ -1,7 +1,13 @@
 <template>
   <v-menu transition="slide-y-transition">
     <template v-slot:activator="{ props }">
-      <v-btn icon v-bind="props" color="primary" size="small">
+      <v-btn
+        icon
+        v-bind="props"
+        color="primary"
+        size="small"
+        :disabled="disabled"
+      >
         <v-icon>mdi-filter</v-icon>
       </v-btn>
     </template>
@@ -27,6 +33,10 @@
 import { computed, ref } from 'vue';
 import { defineEmits } from 'vue';
 import { STATUS_OPTIONS } from '../../constanst';
+
+defineProps<{
+  disabled: boolean;
+}>();
 
 const emits = defineEmits<{
   (event: 'statusSelected', status: string): void;

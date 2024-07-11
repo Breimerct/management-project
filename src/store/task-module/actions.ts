@@ -98,6 +98,7 @@ export const actions: ActionTree<ITaskState, RootState> = {
   async searchTask({ commit, rootGetters }, { projectId }) {
     try {
       EventBus.emit('loading', true);
+      commit('setTasks', {});
       const userId = rootGetters['auth/getCurrentUser'].uid;
       const response = await getDB(`task/${projectId}`, userId);
 
