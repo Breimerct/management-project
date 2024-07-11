@@ -38,7 +38,9 @@ export const actions: ActionTree<IProjectState, RootState> = {
   async updateProject({ dispatch }, project: Project) {
     try {
       EventBus.emit('loading', true);
-      await updateData(`projects/${project.uid}`, { ...project });
+      await updateData(`projects/${project.uid}`, { ...project }).then(() => {
+        $toast.success('Project updated successfully');
+      });
       dispatch('searchProjects');
     } catch (error) {
       const { code } = error as FirebaseError;
@@ -57,8 +59,13 @@ export const actions: ActionTree<IProjectState, RootState> = {
   async deleteProject({ dispatch }, projectId: string) {
     try {
       EventBus.emit('loading', true);
-      await updateData(`projects/${projectId}`, null);
-      await updateData(`task/${projectId}`, null);
+
+      await Promise.all([
+        updateData(`projects/${projectId}`, null),
+        updateData(`task/${projectId}`, null),
+      ]).then(() => {
+        $toast.success('Project deleted successfully');
+      });
 
       dispatch('searchProjects');
     } catch (error) {
