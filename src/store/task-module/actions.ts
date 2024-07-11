@@ -6,12 +6,14 @@ import { getDB, setDB, updateData } from '../../plugins/firebase';
 import { FIREBASE_ERRORS } from '../../constanst/firebaseError';
 import { FirebaseError } from 'firebase/app';
 import { useToast } from 'vue-toast-notification';
+import EventBus from '../../plugins/eventBus';
 
 export const $toast = useToast();
 
 export const actions: ActionTree<ITaskState, RootState> = {
   createTask({ dispatch }, task: Task) {
     try {
+      EventBus.emit('loading', true);
       setDB(`task/${task.projectId}/${task.statusId}`, task).then(() => {
         $toast.success('Task created successfully');
       });
@@ -25,6 +27,8 @@ export const actions: ActionTree<ITaskState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 
@@ -33,6 +37,7 @@ export const actions: ActionTree<ITaskState, RootState> = {
     { oldTask, newTask }: { oldTask: Task; newTask: Task },
   ) {
     try {
+      EventBus.emit('loading', true);
       updateData(
         `task/${oldTask.projectId}/${newTask.statusId}/${oldTask.uid}`,
         {
@@ -60,11 +65,14 @@ export const actions: ActionTree<ITaskState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 
   async deleteTask({ dispatch }, task: Task) {
     try {
+      EventBus.emit('loading', true);
       updateData(
         `task/${task.projectId}/${task.statusId}/${task.uid}`,
         null,
@@ -82,11 +90,14 @@ export const actions: ActionTree<ITaskState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 
   async searchTask({ commit, rootGetters }, { projectId }) {
     try {
+      EventBus.emit('loading', true);
       const userId = rootGetters['auth/getCurrentUser'].uid;
       const response = await getDB(`task/${projectId}`, userId);
 
@@ -101,6 +112,8 @@ export const actions: ActionTree<ITaskState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 };

@@ -6,12 +6,14 @@ import { getDB, setDB } from '../../plugins/firebase';
 import { FirebaseError } from 'firebase/app';
 import { FIREBASE_ERRORS } from '../../constanst/firebaseError';
 import { useToast } from 'vue-toast-notification';
+import EventBus from '../../plugins/eventBus';
 
 export const $toast = useToast();
 
 export const actions: ActionTree<IProjectState, RootState> = {
   createProject({ rootGetters, dispatch }, project: Project) {
     try {
+      EventBus.emit('loading', true);
       const userId = rootGetters['auth/getCurrentUser'].uid;
       const newProject = { ...project, userId };
 
@@ -28,11 +30,14 @@ export const actions: ActionTree<IProjectState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 
   async searchProjects({ commit, rootGetters }) {
     try {
+      EventBus.emit('loading', true);
       const userId = rootGetters['auth/getCurrentUser'].uid;
       const response = await getDB('projects', userId);
       const projects = Object.values(response || {});
@@ -47,6 +52,8 @@ export const actions: ActionTree<IProjectState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 };

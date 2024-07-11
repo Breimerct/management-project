@@ -11,12 +11,14 @@ import {
 import { FIREBASE_ERRORS } from '../../constanst/firebaseError';
 import { FirebaseError } from 'firebase/app';
 import { useToast } from 'vue-toast-notification';
+import EventBus from '../../plugins/eventBus';
 
 const $toast = useToast();
 
 export const actions: ActionTree<IAuthState, RootState> = {
   async register({ commit }, payload: NewUser) {
     try {
+      EventBus.emit('loading', true);
       const user = await createAccount(payload);
       sessionStorage.setItem('user', JSON.stringify(user));
       commit('setUser', user);
@@ -29,11 +31,14 @@ export const actions: ActionTree<IAuthState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 
   async login({ commit }, payload: { email: string; password: string }) {
     try {
+      EventBus.emit('loading', true);
       const user = await signInWithEmailAndPass(
         payload.email,
         payload.password,
@@ -49,11 +54,14 @@ export const actions: ActionTree<IAuthState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 
   resetPassword({}, email: string) {
     try {
+      EventBus.emit('loading', true);
       resetPassword(email).then(() => {
         $toast.success('Check your email to reset your password');
       });
@@ -66,11 +74,14 @@ export const actions: ActionTree<IAuthState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 
   async logout({ commit }) {
     try {
+      EventBus.emit('loading', true);
       await logout();
       sessionStorage.removeItem('user');
       commit('setUser', null);
@@ -83,6 +94,8 @@ export const actions: ActionTree<IAuthState, RootState> = {
       }
 
       throw new Error(FIREBASE_ERRORS[code]);
+    } finally {
+      EventBus.emit('loading', false);
     }
   },
 };
