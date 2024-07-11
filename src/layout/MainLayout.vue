@@ -2,9 +2,9 @@
   <v-layout>
     <v-navigation-drawer permanent expand-on-hover rail>
       <v-list-item
-        :prepend-avatar="`${UI_AVATAR_URL_BASE}&name=${currentUser.displayName}`"
+        :prepend-avatar="`${UI_AVATAR_URL_BASE}&name=${currentUser?.displayName}`"
         class="text-capitalize"
-        :title="capitalizeText(currentUser.displayName || '')"
+        :title="capitalizeText(currentUser?.displayName || '')"
         nav
       >
         <template v-slot:append>

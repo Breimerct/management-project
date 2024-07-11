@@ -8,7 +8,7 @@ export const FIREBASE_ERRORS: Record<string, string> = {
   'auth/wrong-password': 'The password is incorrect.',
   'auth/user-not-found': 'The user is not found.',
   'auth/weak-password': 'The password is too weak.',
-  'auth/invalid-credential': 'The credential is invalid.',
+  'auth/invalid-credential': 'Please check your credentials and try again.',
   'auth/internal-error': 'An internal error has occurred.',
   'auth/unauthorized-error': 'You are not authorized to perform this action.',
   'auth/too-many-requests':
