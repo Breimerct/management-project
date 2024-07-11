@@ -1,7 +1,7 @@
 <template>
   <DialogContent>
     <template #dialog-button="{ showDialog }">
-      <v-btn @click="showDialog" icon size="x-small" color="primary" text>
+      <v-btn @click="showDialog" icon size="x-small" color="primary">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
     </template>

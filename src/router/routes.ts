@@ -4,7 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: {
-      name: 'projects',
+      name: 'project',
     },
     meta: {
       requiresAuth: true,

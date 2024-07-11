@@ -42,8 +42,14 @@ withDefaults(
     icon?: string;
     buttonColor?: string;
     buttonText?: string;
-    buttonSize?: string;
-    buttonVariant?: string;
+    buttonSize?: 'x-small' | 'small' | 'default' | 'large' | 'x-large';
+    buttonVariant?:
+      | 'flat'
+      | 'text'
+      | 'elevated'
+      | 'tonal'
+      | 'outlined'
+      | 'plain';
     buttonConfirmText?: string;
     buttonConfirmColor?: string;
     buttonCancelText?: string;
@@ -52,7 +58,7 @@ withDefaults(
   {
     buttonColor: 'primary',
     buttonSize: 'x-small',
-    buttonVariant: '',
+    buttonVariant: 'text',
     buttonConfirmText: 'Confirm',
     buttonConfirmColor: 'success',
     buttonCancelText: 'Cancel',

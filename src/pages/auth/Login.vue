@@ -24,11 +24,11 @@
 
     <v-card-actions>
       <v-btn color="primary" variant="outlined" type="submit">Login</v-btn>
-      <v-btn text to="/auth/register">Register</v-btn>
+      <v-btn to="/auth/register">Register</v-btn>
 
       <v-spacer></v-spacer>
 
-      <v-btn text to="/auth/forgot-password">Forgot Password?</v-btn>
+      <v-btn to="/auth/forgot-password">Forgot Password?</v-btn>
     </v-card-actions>
   </v-form>
 </template>
@@ -43,7 +43,7 @@ import { useRouter } from 'vue-router';
 const store = useStore<RootState>();
 const router = useRouter();
 
-const formValid = ref();
+const formValid = ref(false);
 const email = ref('');
 const password = ref('');
 
@@ -56,7 +56,7 @@ const handleLogin = () => {
       password: password.value,
     })
     .then(() => {
-      router.push('/');
+      router.push({ name: 'project' });
     });
 };
 </script>

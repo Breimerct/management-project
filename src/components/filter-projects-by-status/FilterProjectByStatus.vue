@@ -34,6 +34,9 @@ import { computed, ref } from 'vue';
 import { defineEmits } from 'vue';
 import { STATUS_OPTIONS } from '../../constanst';
 
+// components imports
+import Typography from '../Typography.vue';
+
 defineProps<{
   disabled: boolean;
 }>();

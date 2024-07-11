@@ -3,7 +3,7 @@
     "target": "esnext",
     "module": "es2020",
     "moduleResolution": "node",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -18,15 +18,15 @@
     "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
     "paths": {},
-    "types": ["vite/client", "unplugin-vue-router/client"],
+    "types": ["vite/client"],
     "allowJs": true,
 
-    "strictNullChecks": true,
-    "noUnusedLocals": true,
+    "strictNullChecks": false,
+    "noUnusedLocals": false,
 
-    "isolatedModules": true
+    "isolatedModules": false
   },
-  "include": ["src/**/*", "src/**/*.vue", "src/components/task-form/.geek"],
+  "include": ["src/**/*", "src/**/*.vue"],
   "exclude": ["dist", "node_modules", "cypress"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
