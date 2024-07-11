@@ -8,7 +8,7 @@
         :color="buttonColor"
         :variant="buttonVariant"
       >
-        <v-icon v-if="icon">{{ icon }}</v-icon>
+        <v-icon v-if="!!icon">{{ icon }}</v-icon>
         {{ buttonText }}
       </v-btn>
     </template>

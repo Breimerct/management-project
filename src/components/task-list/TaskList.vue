@@ -26,7 +26,6 @@
             buttonColor="error"
             buttonConfirmText="Delete"
             buttonConfirmColor="error"
-            buttonCancelText="Cancel"
             buttonCancelColor="primary"
             @onConfirm="deleteTask(task)"
           />
@@ -57,6 +56,7 @@ import { RootState } from '../../store';
 import Typography from '../../components/Typography.vue';
 import NewTask from '../../components/new-task/NewTask.vue';
 import EditTask from '../../components/edit-task/EditTask.vue';
+import DialogConfirm from '../../components/dialog-confirm/DialogConfirm.vue';
 
 const $store = useStore<RootState>();
 

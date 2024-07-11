@@ -43,7 +43,7 @@
         message="Are you sure you want to delete the project? if you delete it the tasks assigned to it will also be deleted."
         buttonColor="error"
         buttonText="Delete"
-        buttonSize=""
+        buttonSize="default"
         buttonVariant="tonal"
         @onConfirm="handleDeleteProject"
       />
@@ -58,6 +58,9 @@ import { Project } from '../../types';
 import { RootState } from '../../store';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+
+// components imports
+import DialogConfirm from '../dialog-confirm/DialogConfirm.vue';
 
 const $store = useStore<RootState>();
 const router = useRouter();
