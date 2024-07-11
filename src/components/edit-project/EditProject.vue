@@ -22,17 +22,22 @@
 
 <script lang="ts" setup>
 import { Project } from '../../types';
+import { useStore } from 'vuex';
+import { RootState } from '../../store';
 
 // Components import
 import DialogContent from '../../components/dialog-content/DialogContent.vue';
 import ProjectForm from '../../components/project-form/ProjectForm.vue';
+
+const $store = useStore<RootState>();
 
 defineProps<{
   project: Project;
 }>();
 
 const saveEditProject = (project: Project, callback: () => void) => {
-  console.log(project);
-  callback();
+  $store.dispatch('project/updateProject', project).then(() => {
+    callback();
+  });
 };
 </script>

@@ -1,7 +1,13 @@
 <template>
   <DialogContent>
     <template #dialog-button="{ showDialog }">
-      <v-btn @click="showDialog" icon size="x-small" :color="buttonColor">
+      <v-btn
+        @click="showDialog"
+        :icon="!!icon"
+        :size="buttonSize"
+        :color="buttonColor"
+        :variant="buttonVariant"
+      >
         <v-icon v-if="icon">{{ icon }}</v-icon>
         {{ buttonText }}
       </v-btn>
@@ -31,20 +37,22 @@ import DialogContent from '../dialog-content/DialogContent.vue';
 
 withDefaults(
   defineProps<{
-    title: string;
-    message: string;
-    icon: string;
-    buttonColor: string;
-    buttonText: string;
-    buttonConfirmText: string;
-    buttonConfirmColor: string;
-    buttonCancelText: string;
-    buttonCancelColor: string;
+    title?: string;
+    message?: string;
+    icon?: string;
+    buttonColor?: string;
+    buttonText?: string;
+    buttonSize?: string;
+    buttonVariant?: string;
+    buttonConfirmText?: string;
+    buttonConfirmColor?: string;
+    buttonCancelText?: string;
+    buttonCancelColor?: string;
   }>(),
   {
     buttonColor: 'primary',
-    icon: '',
-    buttonText: '',
+    buttonSize: 'x-small',
+    buttonVariant: '',
     buttonConfirmText: 'Confirm',
     buttonConfirmColor: 'success',
     buttonCancelText: 'Cancel',

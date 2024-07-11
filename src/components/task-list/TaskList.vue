@@ -19,6 +19,8 @@
             title="Delete Task"
             message="Are you sure you want to delete this task?"
             icon="mdi-delete-outline"
+            buttonSize="x-small"
+            buttonVariant="elevated"
             buttonColor="error"
             buttonConfirmText="Delete"
             buttonConfirmColor="error"

@@ -2,7 +2,7 @@
   <v-form v-model="formValid" @submit.prevent="createProject">
     <v-card-text class="d-flex flex-column ga-4">
       <v-text-field
-        v-model="project.name"
+        v-model="projectForm.name"
         label="Project Name"
         variant="outlined"
         color="primary"
@@ -12,7 +12,7 @@
       ></v-text-field>
 
       <v-textarea
-        v-model="project.description"
+        v-model="projectForm.description"
         label="Description"
         variant="outlined"
         color="primary"
@@ -22,7 +22,7 @@
       ></v-textarea>
 
       <v-switch
-        v-model="project.status"
+        v-model="projectForm.status"
         hide-details
         label="Active Project"
         color="primary"
@@ -34,6 +34,19 @@
     <v-card-actions>
       <v-btn variant="outlined" color="primary" type="submit"> save </v-btn>
       <v-btn @click="handleCancel" variant="tonal" color="error">Cancel</v-btn>
+
+      <v-spacer></v-spacer>
+
+      <DialogConfirm
+        v-if="!!project && project?.uid"
+        title="Delete Project"
+        message="Are you sure you want to delete the project? if you delete it the tasks assigned to it will also be deleted."
+        buttonColor="error"
+        buttonText="Delete"
+        buttonSize=""
+        buttonVariant="tonal"
+        @onConfirm="handleDeleteProject"
+      />
     </v-card-actions>
   </v-form>
 </template>
@@ -42,8 +55,14 @@
 import { ref, defineEmits } from 'vue';
 import { NAME_RULES, DESCRIPTION_RULES } from '../../constanst';
 import { Project } from '../../types';
+import { RootState } from '../../store';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
-const { project: ProjectProp } = defineProps<{
+const $store = useStore<RootState>();
+const router = useRouter();
+
+const { project } = defineProps<{
   project?: Project;
 }>();
 
@@ -53,23 +72,30 @@ const emits = defineEmits<{
 }>();
 
 const formValid = ref(false);
-const project = ref({
-  name: ProjectProp?.name || '',
-  description: ProjectProp?.description || '',
-  status: ProjectProp?.status || 'inactive',
+const projectForm = ref({
+  name: project?.name || '',
+  description: project?.description || '',
+  status: project?.status || 'inactive',
 });
 
 const createProject = () => {
   if (!formValid.value) return;
 
   const newProject: Project = {
-    name: project.value.name,
-    description: project.value.description,
-    status: project.value.status,
+    name: projectForm.value.name,
+    description: projectForm.value.description,
+    status: projectForm.value.status,
     createAt: new Date(),
   };
 
-  emits('onSave', newProject);
+  emits('onSave', { ...project, ...newProject });
+};
+
+const handleDeleteProject = () => {
+  $store.dispatch('project/deleteProject', project?.uid).then(() => {
+    router.push({ name: 'project' });
+    emits('onCancel');
+  });
 };
 
 const handleCancel = () => {

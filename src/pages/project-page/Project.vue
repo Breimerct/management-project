@@ -68,9 +68,12 @@ const projects = computed<Project[]>(
 );
 
 const project = computed<Project>(() => {
-  return projects.value.find(
-    (project) => project.uid === id.value.uid,
-  ) as Project;
+  if (!id.value || !projects.value.length) return {} as Project;
+
+  return (
+    projects.value.find((project) => project.uid === id.value.uid) ||
+    ({} as Project)
+  );
 });
 
 onMounted(async () => {

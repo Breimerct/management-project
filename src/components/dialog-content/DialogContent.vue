@@ -5,7 +5,7 @@
     </template>
 
     <template v-slot:default>
-      <v-card :title="title" class="pa-4">
+      <v-card class="pa-4">
         <slot name="dialog-body" :hideDialog="hideDialog"></slot>
       </v-card>
     </template>
@@ -13,12 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
-
-defineProps({
-  title: String,
-  buttonText: String,
-});
+import { ref } from 'vue';
 
 const isActive = ref(false);
 
