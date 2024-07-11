@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     DialogContent: typeof import('./src/components/dialog-content/DialogContent.vue')['default']
+    EditTask: typeof import('./src/components/edit-task/EditTask.vue')['default']
     FilterProjectByStatus: typeof import('./src/components/filter-projects-by-status/FilterProjectByStatus.vue')['default']
     NewProject: typeof import('./src/components/new-project/NewProject.vue')['default']
     NewTask: typeof import('./src/components/new-task/NewTask.vue')['default']

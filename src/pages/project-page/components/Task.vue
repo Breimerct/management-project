@@ -5,7 +5,15 @@
       :key="task.uid"
       class="task-list-item"
     >
-      {{ task.name }}
+      <div class="d-flex justify-space-between">
+        <Typography tag="h6" variant="h6" bold>{{ task.name }}</Typography>
+
+        <EditTask :task="task" />
+      </div>
+
+      <Typography tag="p" variant="body-1" class="text-truncate">{{
+        task.description
+      }}</Typography>
     </li>
 
     <NewTask :projectId="projectId" :statusId="statusId" />
@@ -18,7 +26,10 @@ import { Task } from '../../../types';
 import { useStore } from 'vuex';
 import { RootState } from '../../../store';
 
+// Components imports
+import Typography from '../../../components/Typography.vue';
 import NewTask from '../../../components/new-task/NewTask.vue';
+import EditTask from '../../../components/edit-task/EditTask.vue';
 
 const $store = useStore<RootState>();
 
@@ -49,9 +60,10 @@ const convertObjectToArray = (data: Record<string, Task>) =>
   &-item {
     padding: 1rem;
     border-radius: 0.5rem;
-    background-color: #f5f5f5;
+    background-color: #cccccc;
     margin-bottom: 1rem;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    cursor: grab;
   }
 }
 

@@ -2,7 +2,7 @@
   <v-form v-model="formValid" @submit.prevent="createTask">
     <v-card-text class="d-flex flex-column ga-4">
       <v-text-field
-        v-model="task.name"
+        v-model="taskForm.name"
         label="Task Name"
         variant="outlined"
         color="primary"
@@ -12,7 +12,7 @@
       ></v-text-field>
 
       <v-select
-        v-model="task.status"
+        v-model="taskForm.status"
         :items="STATUS_TASKS"
         label="Status"
         variant="outlined"
@@ -25,7 +25,7 @@
       ></v-select>
 
       <v-textarea
-        v-model="task.description"
+        v-model="taskForm.description"
         label="Description"
         variant="outlined"
         color="primary"
@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue';
+import { ref, defineEmits, defineProps } from 'vue';
 import {
   NAME_RULES,
   DESCRIPTION_RULES,
@@ -52,6 +52,10 @@ import {
 } from '../../constanst';
 import { Task } from '../../types';
 
+const { task } = defineProps<{
+  task?: Task;
+}>();
+
 const emits = defineEmits<{
   (event: 'onSave', task: Task): void;
   (event: 'onCancel'): void;
@@ -59,20 +63,20 @@ const emits = defineEmits<{
 
 const formValid = ref(false);
 
-const task = ref({
-  name: '',
-  description: '',
-  status: '',
+const taskForm = ref({
+  name: task?.name || '',
+  description: task?.description || '',
+  status: task?.statusId || '',
 });
 
 const createTask = () => {
   if (!formValid.value) return;
 
   const newTask: Task = {
-    name: task.value.name,
-    description: task.value.description,
-    statusId: task.value.status,
-    createAt: new Date(),
+    name: taskForm.value.name,
+    description: taskForm.value.description,
+    statusId: taskForm.value.status,
+    createAt: new Date().toString(),
   };
 
   emits('onSave', newTask);

@@ -2,7 +2,7 @@ import { type ActionTree } from 'vuex';
 import { type ITaskState } from './state';
 import { type RootState } from '..';
 import { Task } from '../../types';
-import { getDB, setDB } from '../../plugins/firebase';
+import { getDB, setDB, updateData } from '../../plugins/firebase';
 import { FIREBASE_ERRORS } from '../../constanst/firebaseError';
 import { FirebaseError } from 'firebase/app';
 import { useToast } from 'vue-toast-notification';
@@ -14,6 +14,36 @@ export const actions: ActionTree<ITaskState, RootState> = {
     try {
       setDB(`task/${task.projectId}/${task.statusId}`, task);
       dispatch('searchTask', task);
+    } catch (error) {
+      const { code } = error as FirebaseError;
+
+      if (code) {
+        console.error(FIREBASE_ERRORS[code]);
+        $toast.error(FIREBASE_ERRORS[code]);
+      }
+
+      throw new Error(FIREBASE_ERRORS[code]);
+    }
+  },
+
+  async updateTask(
+    { dispatch },
+    { oldTask, newTask }: { oldTask: Task; newTask: Task },
+  ) {
+    try {
+      updateData(
+        `task/${oldTask.projectId}/${newTask.statusId}/${oldTask.uid}`,
+        {
+          ...oldTask,
+          ...newTask,
+        },
+      );
+      updateData(
+        `task/${oldTask.projectId}/${oldTask.statusId}/${oldTask.uid}`,
+        null,
+      );
+
+      dispatch('searchTask', { projectId: oldTask.projectId });
     } catch (error) {
       const { code } = error as FirebaseError;
 
