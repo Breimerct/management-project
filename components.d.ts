@@ -7,6 +7,8 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    DeleteTask: typeof import('./src/components/dialog-confirm/DeleteTask.vue')['default']
+    DialogConfirm: typeof import('./src/components/dialog-confirm/DialogConfirm.vue')['default']
     DialogContent: typeof import('./src/components/dialog-content/DialogContent.vue')['default']
     EditTask: typeof import('./src/components/edit-task/EditTask.vue')['default']
     FilterProjectByStatus: typeof import('./src/components/filter-projects-by-status/FilterProjectByStatus.vue')['default']

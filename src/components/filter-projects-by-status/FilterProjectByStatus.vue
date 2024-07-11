@@ -6,7 +6,7 @@
       </v-btn>
     </template>
     <v-list class="pa-4 px-6">
-      <Typography variant="body-1" bold class="mb-4"
+      <Typography tag="p" variant="body-1" bold class="mb-4"
         >Filter by Status</Typography
       >
       <v-radio-group v-model="projectStatus">

@@ -38,12 +38,31 @@ export const actions: ActionTree<ITaskState, RootState> = {
           ...newTask,
         },
       );
-      updateData(
-        `task/${oldTask.projectId}/${oldTask.statusId}/${oldTask.uid}`,
-        null,
-      );
+
+      if (oldTask.statusId !== newTask.statusId) {
+        updateData(
+          `task/${oldTask.projectId}/${oldTask.statusId}/${oldTask.uid}`,
+          null,
+        );
+      }
 
       dispatch('searchTask', { projectId: oldTask.projectId });
+    } catch (error) {
+      const { code } = error as FirebaseError;
+
+      if (code) {
+        console.error(FIREBASE_ERRORS[code]);
+        $toast.error(FIREBASE_ERRORS[code]);
+      }
+
+      throw new Error(FIREBASE_ERRORS[code]);
+    }
+  },
+
+  async deleteTask({ dispatch }, task: Task) {
+    try {
+      updateData(`task/${task.projectId}/${task.statusId}/${task.uid}`, null);
+      dispatch('searchTask', { projectId: task.projectId });
     } catch (error) {
       const { code } = error as FirebaseError;
 

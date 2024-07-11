@@ -6,14 +6,39 @@
       class="task-list-item"
     >
       <div class="d-flex justify-space-between">
-        <Typography tag="h6" variant="h6" bold>{{ task.name }}</Typography>
+        <Typography tag="h6" variant="h6" bold class="text-truncate">
+          {{ task.name }}
+          <v-tooltip activator="parent" location="bottom" style="width: 200px">
+            {{ task.name }}
+          </v-tooltip>
+        </Typography>
 
-        <EditTask :task="task" />
+        <div class="d-flex flex-nowrap ga-2 ml-2">
+          <EditTask :task="task" />
+          <DialogConfirm
+            title="Delete Task"
+            message="Are you sure you want to delete this task?"
+            icon="mdi-delete-outline"
+            buttonColor="error"
+            buttonConfirmText="Delete"
+            buttonConfirmColor="error"
+            buttonCancelText="Cancel"
+            buttonCancelColor="primary"
+            @onConfirm="deleteTask(task)"
+          />
+        </div>
       </div>
 
-      <Typography tag="p" variant="body-1" class="text-truncate">{{
-        task.description
-      }}</Typography>
+      <Typography tag="p" variant="body-1" class="text-truncate">
+        {{ task.description }}
+        <v-tooltip
+          activator="parent"
+          location="bottom"
+          style="width: 200px !important"
+        >
+          {{ task.description }}
+        </v-tooltip>
+      </Typography>
     </li>
 
     <NewTask :projectId="projectId" :statusId="statusId" />
@@ -44,6 +69,10 @@ const tasks = computed<Record<string, any>>(
 
 const convertObjectToArray = (data: Record<string, Task>) =>
   Object.values(data || {});
+
+const deleteTask = (task: Task) => {
+  $store.dispatch('task/deleteTask', task);
+};
 </script>
 
 <style lang="scss" scoped>
