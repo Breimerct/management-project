@@ -18,7 +18,7 @@
     "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
     "paths": {},
-    "types": ["vite/client", "firebase"],
+    "types": ["vite/client"],
     "allowJs": true,
 
     "strictNullChecks": false,
