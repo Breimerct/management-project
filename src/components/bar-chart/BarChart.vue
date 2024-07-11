@@ -1,11 +1,11 @@
 <template>
-  <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+  <Bar :options="chartOptions" :data="chartData" />
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, reactive } from 'vue';
-import { Bar } from 'vue-chartjs';
+import { computed, defineProps } from 'vue';
 import { Chart as ChartJS, registerables } from 'chart.js';
+import { Bar } from 'vue-chartjs';
 
 ChartJS.register(...registerables);
 
@@ -15,7 +15,7 @@ const { data } = defineProps<{
 
 const propsData = computed(() => data);
 
-const chartData = reactive({
+const chartData = computed(() => ({
   labels: propsData.value.map((item) => item.name),
   datasets: [
     {
@@ -23,9 +23,9 @@ const chartData = reactive({
       backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
     },
   ],
-});
+}));
 
-const chartOptions = reactive({
+const chartOptions = computed(() => ({
   responsive: true,
   maintainAspectRatio: false,
   aspectRatio: 3 / 4,
@@ -34,5 +34,5 @@ const chartOptions = reactive({
       display: false,
     },
   },
-});
+}));
 </script>

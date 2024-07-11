@@ -11,6 +11,9 @@ import { RootState } from '../../store';
 import { useRoute } from 'vue-router';
 import { STATUS_TASKS } from '../../constanst';
 
+// components import
+import BarChart from '../../components/bar-chart/BarChart.vue';
+
 const $store = useStore<RootState>();
 const route = useRoute();
 
