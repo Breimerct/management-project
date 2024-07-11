@@ -20,6 +20,15 @@
         dense
         required
       ></v-textarea>
+
+      <v-switch
+        v-model="project.status"
+        hide-details
+        label="Active Project"
+        color="primary"
+        false-value="inactive"
+        true-value="active"
+      ></v-switch>
     </v-card-text>
 
     <v-card-actions>
@@ -43,6 +52,7 @@ const formValid = ref(false);
 const project = ref({
   name: '',
   description: '',
+  status: 'inactive',
 });
 
 const createProject = () => {
@@ -51,6 +61,7 @@ const createProject = () => {
   const newProject: Project = {
     name: project.value.name,
     description: project.value.description,
+    status: project.value.status,
     createAt: new Date(),
   };
 

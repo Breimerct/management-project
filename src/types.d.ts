@@ -48,7 +48,7 @@ export type Project = {
   description: string;
   createAt?: string | Date;
   userId?: string;
-  isActive?: boolean;
+  status?: string;
 };
 
 export type Task = {

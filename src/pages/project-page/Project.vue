@@ -1,6 +1,6 @@
 <template>
   <v-row align="center" class="mb-2">
-    <v-col cols="6">
+    <v-col cols="6" class="d-flex ga-2">
       <v-autocomplete
         hide-details
         variant="outlined"
@@ -13,6 +13,8 @@
         item-title="name"
         return-object
       ></v-autocomplete>
+
+      <FilterProjectByStatus @statusSelected="statusProjectFilter = $event" />
     </v-col>
     <v-col cols="6" align="end">
       <NewProject />
@@ -25,22 +27,23 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
-import { RootState } from '@/store';
 import { Project } from '../../types';
+import { RootState } from '@/store';
+import { useStore } from 'vuex';
 
 // imports components
+import FilterProjectByStatus from '../../components/filter-projects-by-status/FilterProjectByStatus.vue';
+import NewProject from '../../components/new-project/NewProject.vue';
 import ProjectHome from './components/ProjectHome.vue';
 import Board from './components/Board.vue';
-import NewProject from '../../components/new-project/NewProject.vue';
-import { onMounted } from 'vue';
 
 const route = useRoute();
 const router = useRouter();
 const $store = useStore<RootState>();
 
+const statusProjectFilter = ref('all');
 const id = computed<Project>({
   get: () => {
     const projectId = route.params.projectId;
@@ -55,7 +58,11 @@ const id = computed<Project>({
 });
 
 const projects = computed<Project[]>(
-  () => $store.getters['project/getProjects'],
+  () =>
+    $store.getters['project/getProjects'].filter((project: Project) => {
+      if (statusProjectFilter.value === 'all') return true;
+      return project.status === statusProjectFilter.value;
+    }) as Project[],
 );
 
 onMounted(async () => {
