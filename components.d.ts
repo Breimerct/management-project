@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BarChart: typeof import('./src/components/bar-chart/BarChart.vue')['default']
     DeleteTask: typeof import('./src/components/dialog-confirm/DeleteTask.vue')['default']
     DialogConfirm: typeof import('./src/components/dialog-confirm/DialogConfirm.vue')['default']
     DialogContent: typeof import('./src/components/dialog-content/DialogContent.vue')['default']

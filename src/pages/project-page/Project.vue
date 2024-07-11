@@ -48,7 +48,9 @@ const id = computed<Project>({
     ) as Project;
   },
   set: (value: Project) => {
-    router.push(`/projects/${value.uid}`);
+    console.log(value.uid);
+    const routeName = route.name === 'project' ? 'projectBoard' : route?.name;
+    router.push({ name: routeName || '', params: { projectId: value.uid } });
     $store.dispatch('task/searchTask', { projectId: value.uid });
   },
 });

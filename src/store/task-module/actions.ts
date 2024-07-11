@@ -90,6 +90,7 @@ export const actions: ActionTree<ITaskState, RootState> = {
       const userId = rootGetters['auth/getCurrentUser'].uid;
       const response = await getDB(`task/${projectId}`, userId);
 
+      console.log(response);
       commit('setTasks', response || {});
     } catch (error) {
       const { code } = error as FirebaseError;

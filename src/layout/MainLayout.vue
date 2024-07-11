@@ -20,7 +20,16 @@
           prepend-icon="mdi-home-city"
           color="primary"
           title="Home"
-          to="/projects"
+          :to="{ name: 'project' }"
+        />
+
+        <v-list-item
+          exact
+          v-if="projectId"
+          prepend-icon="mdi-chart-bar"
+          color="primary"
+          title="Stats"
+          :to="{ name: 'projectStats', params: { projectId: projectId } }"
         />
       </v-list>
 
@@ -46,15 +55,17 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { RouterView, useRouter } from 'vue-router';
+import { RouterView, useRouter, useRoute } from 'vue-router';
 import { useStore } from 'vuex';
 import { RootState } from '../store';
 import { UI_AVATAR_URL_BASE } from '../constanst';
 
 const $store = useStore<RootState>();
 const router = useRouter();
+const route = useRoute();
 
 const currentUser = computed(() => $store.getters['auth/getCurrentUser']);
+const projectId = computed(() => route.params?.projectId);
 
 const capitalizeText = (text: string) =>
   text.charAt(0).toUpperCase() + text.slice(1);
