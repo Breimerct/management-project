@@ -15,7 +15,9 @@ export const actions: ActionTree<IProjectState, RootState> = {
       const userId = rootGetters['auth/getCurrentUser'].uid;
       const newProject = { ...project, userId };
 
-      setDB('projects', newProject);
+      setDB('projects', newProject).then(() => {
+        $toast.success('Project created successfully');
+      });
       dispatch('searchProjects');
     } catch (error) {
       const { code } = error as FirebaseError;

@@ -12,7 +12,9 @@ export const $toast = useToast();
 export const actions: ActionTree<ITaskState, RootState> = {
   createTask({ dispatch }, task: Task) {
     try {
-      setDB(`task/${task.projectId}/${task.statusId}`, task);
+      setDB(`task/${task.projectId}/${task.statusId}`, task).then(() => {
+        $toast.success('Task created successfully');
+      });
       dispatch('searchTask', task);
     } catch (error) {
       const { code } = error as FirebaseError;
@@ -37,7 +39,9 @@ export const actions: ActionTree<ITaskState, RootState> = {
           ...oldTask,
           ...newTask,
         },
-      );
+      ).then(() => {
+        $toast.success('Task updated successfully');
+      });
 
       if (oldTask.statusId !== newTask.statusId) {
         updateData(
@@ -61,7 +65,13 @@ export const actions: ActionTree<ITaskState, RootState> = {
 
   async deleteTask({ dispatch }, task: Task) {
     try {
-      updateData(`task/${task.projectId}/${task.statusId}/${task.uid}`, null);
+      updateData(
+        `task/${task.projectId}/${task.statusId}/${task.uid}`,
+        null,
+      ).then(() => {
+        $toast.success('Task deleted successfully');
+      });
+
       dispatch('searchTask', { projectId: task.projectId });
     } catch (error) {
       const { code } = error as FirebaseError;

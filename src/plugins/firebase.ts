@@ -114,7 +114,7 @@ export const setDB: SetDB = async <T>(path: string, data: T) => {
   }
 };
 
-export const updateData: UpdateData = (path, data) => {
+export const updateData: UpdateData = async (path, data) => {
   let updates: Record<string, unknown> = {};
   const rootPath = `users/${auth.currentUser?.uid}`;
   const dbRef = ref(db);

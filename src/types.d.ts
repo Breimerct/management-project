@@ -34,7 +34,7 @@ export type SetDB = <T>(path: string, data: T) => Promise<T | null>;
 export type UpdateData = (
   path: string | Record<string, unknown>,
   data?: unknown,
-) => void;
+) => Promise<void>;
 
 export type VFormType = {
   validate: () => boolean;
