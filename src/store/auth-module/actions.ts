@@ -54,7 +54,9 @@ export const actions: ActionTree<IAuthState, RootState> = {
 
   resetPassword({}, email: string) {
     try {
-      resetPassword(email);
+      resetPassword(email).then(() => {
+        $toast.success('Check your email to reset your password');
+      });
     } catch (error) {
       const { code } = error as FirebaseError;
 

@@ -31,8 +31,10 @@ import { ref } from 'vue';
 import { EMAIL_RULES } from '../../constanst';
 import { RootState } from '@/store';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
 const $store = useStore<RootState>();
+const router = useRouter();
 
 const formValid = ref();
 const email = ref('');
@@ -40,6 +42,8 @@ const email = ref('');
 const handleForgotPassword = () => {
   if (!formValid.value) return;
 
-  $store.dispatch('auth/resetPassword', email.value);
+  $store.dispatch('auth/resetPassword', email.value).then(() => {
+    router.push({ name: 'login' });
+  });
 };
 </script>
