@@ -17,7 +17,10 @@
       <FilterProjectByStatus @statusSelected="statusProjectFilter = $event" />
     </v-col>
     <v-col cols="6" align="end">
-      <NewProject />
+      <div class="d-flex ga-2 justify-end">
+        <NewProject />
+        <EditProject :project="project" />
+      </div>
     </v-col>
   </v-row>
 
@@ -34,6 +37,7 @@ import { useStore } from 'vuex';
 // imports components
 import FilterProjectByStatus from '../../components/filter-projects-by-status/FilterProjectByStatus.vue';
 import NewProject from '../../components/new-project/NewProject.vue';
+import EditProject from '../../components/edit-project/EditProject.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -62,6 +66,12 @@ const projects = computed<Project[]>(
       return project.status === statusProjectFilter.value;
     }) as Project[],
 );
+
+const project = computed<Project>(() => {
+  return projects.value.find(
+    (project) => project.uid === id.value.uid,
+  ) as Project;
+});
 
 onMounted(async () => {
   $store.dispatch('project/searchProjects');

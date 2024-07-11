@@ -2,7 +2,8 @@
   <DialogContent>
     <template #dialog-button="{ showDialog }">
       <v-btn @click="showDialog" icon size="x-small" :color="buttonColor">
-        <v-icon>{{ icon }}</v-icon>
+        <v-icon v-if="icon">{{ icon }}</v-icon>
+        {{ buttonText }}
       </v-btn>
     </template>
 
@@ -34,6 +35,7 @@ withDefaults(
     message: string;
     icon: string;
     buttonColor: string;
+    buttonText: string;
     buttonConfirmText: string;
     buttonConfirmColor: string;
     buttonCancelText: string;
@@ -41,6 +43,8 @@ withDefaults(
   }>(),
   {
     buttonColor: 'primary',
+    icon: '',
+    buttonText: '',
     buttonConfirmText: 'Confirm',
     buttonConfirmColor: 'success',
     buttonCancelText: 'Cancel',

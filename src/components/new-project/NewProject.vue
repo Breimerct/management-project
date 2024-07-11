@@ -1,7 +1,12 @@
 <template>
   <DialogContent buttonText="new project">
     <template #dialog-button="{ showDialog }">
-      <v-btn color="primary" @click="showDialog">New Project</v-btn>
+      <v-btn color="primary" @click="showDialog">
+        New Project
+        <template v-slot:prepend>
+          <v-icon> mdi-plus-circle-outline </v-icon>
+        </template>
+      </v-btn>
     </template>
 
     <template #dialog-body="{ hideDialog }">
@@ -20,6 +25,7 @@ import { Project } from '../../types';
 
 // components imports
 import DialogContent from '../dialog-content/DialogContent.vue';
+import ProjectForm from '../project-form/ProjectForm.vue';
 
 const $store = useStore<RootState>();
 

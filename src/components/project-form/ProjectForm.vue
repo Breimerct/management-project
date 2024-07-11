@@ -43,6 +43,10 @@ import { ref, defineEmits } from 'vue';
 import { NAME_RULES, DESCRIPTION_RULES } from '../../constanst';
 import { Project } from '../../types';
 
+const { project: ProjectProp } = defineProps<{
+  project?: Project;
+}>();
+
 const emits = defineEmits<{
   (event: 'onSave', project: Project): void;
   (event: 'onCancel'): void;
@@ -50,9 +54,9 @@ const emits = defineEmits<{
 
 const formValid = ref(false);
 const project = ref({
-  name: '',
-  description: '',
-  status: 'inactive',
+  name: ProjectProp?.name || '',
+  description: ProjectProp?.description || '',
+  status: ProjectProp?.status || 'inactive',
 });
 
 const createProject = () => {
