@@ -17,7 +17,8 @@ declare module 'vue' {
     ProjectForm: typeof import('./src/components/new-project/ProjectForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TaskForm: typeof import('./src/components/new-task/TaskForm.vue')['default']
+    TaskForm: typeof import('./src/components/task-form/TaskForm.vue')['default']
+    TaskList: typeof import('./src/components/task-list/TaskList.vue')['default']
     Typography: typeof import('./src/components/Typography.vue')['default']
   }
 }

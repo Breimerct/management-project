@@ -10,7 +10,7 @@
           {{ status.name }}
         </Typography>
 
-        <Task :statusId="status.id" :projectId="projectId" />
+        <TaskList :statusId="status.id" :projectId="projectId" />
       </li>
     </ol>
   </section>
@@ -25,7 +25,7 @@ import { StatusTask } from '../../../types';
 import { RootState } from '../../../store';
 
 // imports components
-import Task from './Task.vue';
+import TaskList from '../../../components/task-list/TaskList.vue';
 import Typography from '../../../components/Typography.vue';
 
 const route = useRoute();

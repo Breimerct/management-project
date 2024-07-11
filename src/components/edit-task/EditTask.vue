@@ -18,13 +18,13 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import { Task } from '../../types';
 import { useStore } from 'vuex';
+import { Task } from '../../types';
 import { RootState } from '../../store';
 
 // components imports
 import DialogContent from '../../components/dialog-content/DialogContent.vue';
-import TaskForm from '../../components/new-task/TaskForm.vue';
+import TaskForm from '../../components/task-form/TaskForm.vue';
 
 const $store = useStore<RootState>();
 

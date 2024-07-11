@@ -12,9 +12,21 @@ const routes: RouteRecordRaw[] = [
     component: () => import('../layout/MainLayout.vue'),
     children: [
       {
-        path: 'projects/:projectId?',
-        name: 'projects',
+        path: '/projects',
         component: () => import('../pages/project-page/Project.vue'),
+        children: [
+          {
+            path: '',
+            name: 'projects',
+            component: () =>
+              import('../pages/project-page/components/ProjectHome.vue'),
+          },
+          {
+            path: ':projectId',
+            component: () =>
+              import('../pages/project-page/components/Board.vue'),
+          },
+        ],
       },
     ],
   },

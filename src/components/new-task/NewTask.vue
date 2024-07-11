@@ -23,7 +23,7 @@ import { Task } from '../../types';
 
 // components imports
 import DialogContent from '../dialog-content/DialogContent.vue';
-import TaskForm from '../new-task/TaskForm.vue';
+import TaskForm from '../../components/task-form/TaskForm.vue';
 
 const props = defineProps<{
   projectId?: string;

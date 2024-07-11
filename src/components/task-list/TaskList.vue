@@ -47,14 +47,14 @@
 
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { Task } from '../../../types';
+import { Task } from '../../types';
 import { useStore } from 'vuex';
-import { RootState } from '../../../store';
+import { RootState } from '../../store';
 
 // Components imports
-import Typography from '../../../components/Typography.vue';
-import NewTask from '../../../components/new-task/NewTask.vue';
-import EditTask from '../../../components/edit-task/EditTask.vue';
+import Typography from '../../components/Typography.vue';
+import NewTask from '../../components/new-task/NewTask.vue';
+import EditTask from '../../components/edit-task/EditTask.vue';
 
 const $store = useStore<RootState>();
 
@@ -76,7 +76,7 @@ const deleteTask = (task: Task) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../styles/mixin-scroll.scss';
+@import '../../styles/mixin-scroll.scss';
 
 .task-list {
   list-style: none;
