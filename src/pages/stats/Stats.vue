@@ -1,6 +1,6 @@
 <template>
   <v-container class="mb-16">
-    <BarChart :data="data" ref="barChart" />
+    <BarChart :data="data" />
   </v-container>
 </template>
 

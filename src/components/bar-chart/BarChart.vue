@@ -1,14 +1,9 @@
 <template>
-  <Bar
-    id="my-chart-id"
-    :options="chartOptions"
-    :data="chartData"
-    :ref="barChart"
-  />
+  <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, ref, reactive } from 'vue';
+import { computed, defineProps, reactive } from 'vue';
 import { Bar } from 'vue-chartjs';
 import { Chart as ChartJS, registerables } from 'chart.js';
 
@@ -18,7 +13,6 @@ const { data } = defineProps<{
   data: { name: string; quantity: number }[];
 }>();
 
-const barChart = ref();
 const propsData = computed(() => data);
 
 const chartData = reactive({
